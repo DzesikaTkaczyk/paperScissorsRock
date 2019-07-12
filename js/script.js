@@ -45,6 +45,8 @@
     scissors.disabled = false;
     log ('lets play!');
     score('You: ' + params.humanScore + '  -  ' + params.computerScore + ' :Computer');
+    params.progress = [];
+    params.actualRound = 1;
   });
 
   for(var i = 0; i < playerMoveObj.length; i++){
