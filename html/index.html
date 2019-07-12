@@ -10,19 +10,28 @@
     	<div id="won"></div>
 		<div id="page-wrapper" class="container">
 		  <div>
-		  	<button id="paper" data-move="paper" class="player-move">Papier</button>
+		  	<button id="paper" data-move="paper" class="player-move">PAPER</button>
 		  </div>
 		  <div>
-			  <button id="rock" data-move="rock" class="player-move">Kamień</button>
+			  <button id="rock" data-move="rock" class="player-move">ROCK</button>
 		  </div>
 		  <div>
-			  <button id="scissors" data-move="scissors" class="player-move">Nożyce</button>
+			  <button id="scissors" data-move="scissors" class="player-move">SCISSORS</button>
 		  </div>
 		</div>
 		<div id="output"></div>
 		<div id="result"></div>
 		<div>
 			  <button id="newGame">NEW GAME</button>
+		</div>
+
+		<div class="overlay" id="modal-overlay">
+			<div class="modal" id="game-over">
+				<a href="#" class="close">x</a>
+				<div class="content">
+					<p></p>
+				</div>
+			</div>
 		</div>
 		<script src="../js/script.js"></script>
 
