@@ -15,21 +15,16 @@
 
   //var computerScore = 0;
 
-
-  /*var parms.actualRound = [];
-  //console.log(parms.actualRund);
-  var parms.humanScore = [];
-  var parms.params.computerScore = [];
-  var parms.params.points = [];
-  var parms.endGame = [];*/
-
-  var params = [{
+  var params = {
     actualRound: 0,
     humanScore: 0,
     computerScore: 0,
     points: 0,
-    endGame: false
-  },];
+    //endGame: false,
+    progress: []
+  };
+
+  //params.progress.push('helooo')
 
   var log = function (text) {
   	output.innerHTML = '<br>' + text + '<br>';
@@ -44,8 +39,6 @@
   var won = document.getElementById('won');
 
   var scoreModal = document.getElementById('game-over')
-
-  //var points;
 
   var playerMoveObj = document.querySelectorAll('.player-move');
 
@@ -69,33 +62,41 @@
   function playerMove(dataMove) {
     var computerMove = Math.round((Math.random() * 2) + 1);
     var computerMoveDictionary = {1: 'paper', 2: 'rock', 3: 'scissors'}
+    var roundState;
     if(params.humanScore < params.points && params.computerScore < params.points) {
       if (computerMoveDictionary[computerMove] == dataMove.getAttribute('data-move')) {
         log ('REMIS: you both played ' + dataMove.getAttribute('data-move'));
+        roundState = "Remis";
         score('You: ' + params.humanScore + '  -  ' + params.computerScore + ' :Computer');
       } else if (computerMove === 1 && dataMove.getAttribute('data-move') == 'rock') {
         log ('YOU LOST: you played ' + dataMove.getAttribute('data-move') + ', computer played ' + computerMoveDictionary[computerMove]);
         params.computerScore ++;
+        roundState = 'Lost';
         score('You: ' + params.humanScore + '  -  ' + params.computerScore + ' :Computer');
       } else if (computerMove === 3 && dataMove.getAttribute('data-move') == 'rock') {
         log ('YOU WON: you played ' + dataMove.getAttribute('data-move') + ', computer played ' + computerMoveDictionary[computerMove]);
         params.humanScore ++;
+        roundState = 'Win';
         score('You: ' + params.humanScore + '  -  ' + params.computerScore + ' :Computer');
       } else if (computerMove === 3 && dataMove.getAttribute('data-move') == 'paper') {
         log ('YOU LOST: you played ' + dataMove.getAttribute('data-move') + ', computer played ' + computerMoveDictionary[computerMove]);
         params.computerScore ++;
+        roundState = 'Lost';
         score('You: ' + params.humanScore + '  -  ' + params.computerScore + ' :Computer');
       } else if (computerMove === 2 && dataMove.getAttribute('data-move') == 'paper') {
         log ('YOU WON: you played ' + dataMove.getAttribute('data-move') + ', computer played ' + computerMoveDictionary[computerMove]);
         params.humanScore ++;
+        roundState = 'Win';
         score('You: ' + params.humanScore + '  -  ' + params.computerScore + ' :Computer');
       } else if (computerMove === 2 && dataMove.getAttribute('data-move') == 'scissors') {
         log ('YOU LOST: you played ' + dataMove.getAttribute('data-move') + ', computer played ' + computerMoveDictionary[computerMove]);
         params.computerScore ++;
+        roundState = 'Lost';
         score('You: ' + params.humanScore + '  -  ' + params.computerScore + ' :Computer');
       } else if (computerMove === 1 && dataMove.getAttribute('data-move') == 'scissors') {
         log ('YOU WON: you played ' + dataMove.getAttribute('data-move') + ', computer played ' + computerMoveDictionary[computerMove]);
         params.humanScore ++;
+        roundState = 'Win';
         score('You: ' + params.humanScore + '  -  ' + params.computerScore + ' :Computer');
       }
       if(params.humanScore == params.points) {
@@ -110,10 +111,11 @@
     else {
       dataMove.disabled = true;
     }
-    //params.actualRound.push = params.actualRound++ ;
-    //params.humanScore.push(humanScore)
-    //params.computerScore.push(params.computerScore)
-    //params.points.push(params.points)
+    params.progress.push(params.actualRound++);
+    params.progress.push(dataMove.getAttribute('data-move'))
+    params.progress.push(computerMoveDictionary[computerMove])
+    params.progress.push(roundState)
+    params.progress.push(params.humanScore + '  -  ' + params.computerScore)
   }
 
   var showModal = function(modalID){
@@ -127,28 +129,6 @@
     };
   };
 
-
-
-  //var gameOverModal = getElementById('game-over')
-
-  /*var showModal = function(event) {
-    event.preventDefault();
-    document.querySelector('#modal-overlay').classList.add('show');
-    document.querySelector('.modal').classList.remove('show');
-    var modals = document.querySelectorAll('.modal');
-    for(var i = 0; i < modals.length; i++) {
-      if(this == modalLinks[i]) {
-        modals[i].classList.add('show');
-      };
-    };
-  };*/
-  
-  //var modalLinks = document.querySelectorAll('.show-modal');
-  
-  //for(var i = 0; i < modalLinks.length; i++){
-  //  modalLinks[i].addEventListener('click', showModal);
-  //}
-  
   // Dodajemy też funkcję zamykającą modal 
   var hideModal = function(event){
     event.preventDefault();
