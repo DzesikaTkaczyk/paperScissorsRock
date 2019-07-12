@@ -36,17 +36,22 @@
   var playerMoveObj = document.querySelectorAll('.player-move');
 
   newGame.addEventListener('click', function(){
-    params.points = window.prompt('To how many params.points would you like to play?');
-    won.innerHTML = 'First to score '+ params.points + ' points - wins!<br><br>';
-    params.humanScore = 0;
-    params.computerScore = 0;
-    paper.disabled = false;
-    rock.disabled = false;
-    scissors.disabled = false;
-    log ('lets play!');
-    score('You: ' + params.humanScore + '  -  ' + params.computerScore + ' :Computer');
-    params.progress = [];
-    params.actualRound = 1;
+    params.points = window.prompt('To how many points would you like to play?');
+    if (isNaN(params.points) || params.points <= 0){
+      showModal('is-nan');
+    }
+    else {
+      won.innerHTML = 'First to score '+ params.points + ' points - wins!<br><br>';
+      params.humanScore = 0;
+      params.computerScore = 0;
+      paper.disabled = false;
+      rock.disabled = false;
+      scissors.disabled = false;
+      log ('lets play!');
+      score('You: ' + params.humanScore + '  -  ' + params.computerScore + ' :Computer');
+      params.progress = [];
+      params.actualRound = 1;
+    }
   });
 
   for(var i = 0; i < playerMoveObj.length; i++){
@@ -124,7 +129,9 @@
     for(var i = 0; i < modals.length; i++) {
       if(modalID == modals[i].id) {
         modals[i].classList.add('show');
-      };
+      } else {
+        modals[i].classList.remove('show');
+      }
     };
   };
 
