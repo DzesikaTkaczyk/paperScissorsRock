@@ -16,7 +16,7 @@
   //var computerScore = 0;
 
   var params = {
-    actualRound: 0,
+    actualRound: 1,
     humanScore: 0,
     computerScore: 0,
     points: 0,
@@ -102,9 +102,11 @@
       if(params.humanScore == params.points) {
         showModal('game-over')
         scoreModal.innerHTML = 'Congratulations! You WON the game!';
+        scoreModal.innerHTML += tableConstr();
       } else if (params.computerScore == params.points) {
         showModal('game-over')
         scoreModal.innerHTML = 'Sorry, you lost the game T_T';
+        scoreModal.innerHTML += tableConstr();
       } else {
         won.innerHTML = 'First to score '+ params.points + ' points - wins!<br><br>'; 
       }}
@@ -150,5 +152,30 @@
     modals[i].addEventListener('click', function(event){
       event.stopPropagation();
     });
-  } 
+  }
+
+  var tableConstr = function(){
+    var table;
+    table = '<table>'
+    table += '<tr>'
+    table += '<th>Round</th>'
+    table += '<th>Your move</th>'
+    table += '<th>Computer move</th>'
+    table += '<th>Win/Lost</th>'
+    table += '<th>Score</th>'
+    table += '</tr>'
+    for(var i = 0; i < params.progress.length; i++){
+      if(i % 5 == 0){
+        table += '<tr>'
+      }
+      table += '<td>'
+      table += params.progress[i];
+      table += '</td>'
+      if(i % 5 == 4){
+        table += '</tr>'
+      }
+    }
+    table += '</table>'
+    return table;
+}
 })(); 
