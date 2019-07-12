@@ -11,20 +11,13 @@
 
   var result = document.getElementById('result');
 
-  //var humanScore = 0;
-
-  //var computerScore = 0;
-
   var params = {
     actualRound: 1,
     humanScore: 0,
     computerScore: 0,
     points: 0,
-    //endGame: false,
     progress: []
   };
-
-  //params.progress.push('helooo')
 
   var log = function (text) {
   	output.innerHTML = '<br>' + text + '<br>';
@@ -38,7 +31,7 @@
 
   var won = document.getElementById('won');
 
-  var scoreModal = document.getElementById('game-over')
+  var scoreModal = document.getElementById('game-over');
 
   var playerMoveObj = document.querySelectorAll('.player-move');
 
@@ -99,12 +92,19 @@
         roundState = 'Win';
         score('You: ' + params.humanScore + '  -  ' + params.computerScore + ' :Computer');
       }
+
+      params.progress.push(params.actualRound++);
+      params.progress.push(dataMove.getAttribute('data-move'));
+      params.progress.push(computerMoveDictionary[computerMove]);
+      params.progress.push(roundState);
+      params.progress.push(params.humanScore + '  -  ' + params.computerScore);
+
       if(params.humanScore == params.points) {
-        showModal('game-over')
+        showModal('game-over');
         scoreModal.innerHTML = 'Congratulations! You WON the game!';
         scoreModal.innerHTML += tableConstr();
       } else if (params.computerScore == params.points) {
-        showModal('game-over')
+        showModal('game-over');
         scoreModal.innerHTML = 'Sorry, you lost the game T_T';
         scoreModal.innerHTML += tableConstr();
       } else {
@@ -112,12 +112,7 @@
       }}
     else {
       dataMove.disabled = true;
-    }
-    params.progress.push(params.actualRound++);
-    params.progress.push(dataMove.getAttribute('data-move'))
-    params.progress.push(computerMoveDictionary[computerMove])
-    params.progress.push(roundState)
-    params.progress.push(params.humanScore + '  -  ' + params.computerScore)
+    }  
   }
 
   var showModal = function(modalID){
@@ -156,26 +151,27 @@
 
   var tableConstr = function(){
     var table;
-    table = '<table>'
-    table += '<tr>'
-    table += '<th>Round</th>'
-    table += '<th>Your move</th>'
-    table += '<th>Computer move</th>'
-    table += '<th>Win/Lost</th>'
-    table += '<th>Score</th>'
-    table += '</tr>'
+    table = '<table>';
+    table += '<tr>';
+    table += '<th>Round</th>';
+    table += '<th>Your move</th>';
+    table += '<th>Computer move</th>';
+    table += '<th>Win/Lost</th>';
+    table += '<th>Score</th>';
+    table += '</tr>';
     for(var i = 0; i < params.progress.length; i++){
       if(i % 5 == 0){
-        table += '<tr>'
+        table += '<tr>';
       }
-      table += '<td>'
+      table += '<td>';
       table += params.progress[i];
-      table += '</td>'
+      table += '</td>';
       if(i % 5 == 4){
-        table += '</tr>'
+        table += '</tr>';
       }
     }
-    table += '</table>'
+    table += '</table>';
     return table;
-}
+  }
+
 })(); 

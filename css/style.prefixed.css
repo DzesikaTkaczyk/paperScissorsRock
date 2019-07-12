@@ -71,4 +71,32 @@ button:hover, button:active {
   min-height: 30px;
   padding: 5px 30px;
 }
+
+table {
+  margin: 0 auto;
+  border-spacing: 0;
+  border-color: seagreen;
+  border-style: solid;
+  border-width: 1px;
+  margin-top: 30px;
+}
+
+th {
+  border-color: darkseagreen;
+  border-style: solid;
+  padding: 10px;
+  border-width: 1px;
+  background-color: palegreen;
+}
+
+td {
+  border-color: darkseagreen;
+  border-style: solid;
+  padding: 4px 10px;
+  border-width: 1px;
+}
+
+tr:hover {
+  background-color: honeydew;
+}
 /*# sourceMappingURL=style.prefixed.css.map */
